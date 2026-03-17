@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import HomePage from "./pages/HomePage";
-import MovieList from "./pages/movies/MovieList";
-import MovieDetail from "./pages/movies/MovieDetail";
+import MovieListPage from "./pages/movies/MovieListPage";
+import MovieDetailPage from "./pages/movies/MovieDetailPage";
 import DefaultTemplate from "./templates/DefaultTemplate";
 
 export default function App() {
@@ -14,8 +14,8 @@ export default function App() {
 
           {/* BOOK ROUTES */}
           <Route path="movies">
-            <Route index Component={MovieList} />
-            <Route path=":id" Component={MovieDetail} />
+            <Route index Component={MovieListPage} />
+            <Route path=":id" Component={MovieDetailPage} />
           </Route>
         </Route>
       </Routes>
