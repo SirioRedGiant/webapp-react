@@ -1,3 +1,3 @@
 export default function MovieDetail() {
-  return <h1>BookDetail</h1>;
+  return <h1>MovieDetail</h1>;
 }
