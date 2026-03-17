@@ -1,3 +1,3 @@
-export default MovieDetail() {
-    return (<h1>BookDetail</h1>)
+export default function MovieDetail() {
+  return <h1>BookDetail</h1>;
 }

@@ -7,9 +7,14 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* SITE ROUTES */}
         <Route index Component={HomePage} />
-        <Route path="/movies" Component={MovieList} />
-        <Route path="/movies/:id" Component={MovieDetail} />
+
+        {/* BOOK ROUTES */}
+        <Route path="/movies">
+          <Route index Component={MovieList} />
+          <Route path=":id" Component={MovieDetail} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
