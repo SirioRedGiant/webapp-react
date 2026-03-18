@@ -1,3 +1,5 @@
+import ReviewCard from "./ReviewCard";
+
 export default function MovieDetail({ movie, reviews }) {
   return (
     <section className="movie-detail py-4">
@@ -11,44 +13,38 @@ export default function MovieDetail({ movie, reviews }) {
           />
         </div>
 
-        {/* Informazioni */}
+        {/* Colonna Destra: Informazioni Film + Recensioni */}
         <div className="col-md-8">
-          <h2 className="display-5 fw-bold">{movie.title}</h2>
-          <p className="text-muted mb-4">
-            Regia di <strong>{movie.director}</strong> | Anno:{" "}
-            {movie.release_year}
-          </p>
-          <div className="bg-light p-3 rounded mb-5">
-            <h5>Descrizione/riassunto</h5>
-            <p className="lead">{movie.abstract}</p>
+          {/* DETTAGLI FILM: Recuperiamo i dati che avevamo "perso" */}
+          <div className="movie-info mb-5">
+            <h1 className="display-2 fw-bold">{movie.title}</h1>
+            <h5 className="text-muted mb-3">
+              Directed by <strong>{movie.director}</strong> |
+              {` ${movie.release_year}`}
+            </h5>
+            <span className="badge bg-info mb-4">{movie.genre}</span>
+
+            <div className="bg-light p-4 rounded shadow-sm">
+              <h5 className="fw-bold">Logline</h5>
+              <p className="lead mb-0">{movie.abstract}</p>
+            </div>
           </div>
 
-          {/* RECENSIONI */}
-          <div className="reviews-section">
-            <h3 className="mb-4 border-bottom pb-2">Recensioni degli utenti</h3>
+          {/* SEZIONE RECENSIONI */}
+          <div className="reviews-section mt-5">
+            <h3 className="mb-4 border-bottom pb-2 text-primary">
+              User Reviews
+            </h3>
 
             {reviews && reviews.length > 0 ? (
-              <div className="list-group">
+              <div className="reviews-list">
                 {reviews.map((review) => (
-                  <div
-                    key={review.id}
-                    className="list-group-item list-group-item-action p-3 mb-2 border rounded shadow-sm"
-                  >
-                    <div className="d-flex w-100 justify-content-between align-items-center">
-                      <h6 className="mb-1 fw-bold text-primary">
-                        {review.name}
-                      </h6>
-                      <span className="badge bg-warning text-dark">
-                        Voto: {review.vote}/5
-                      </span>
-                    </div>
-                    <p className="mb-1 mt-2 text-secondary">"{review.text}"</p>
-                  </div>
+                  <ReviewCard key={review.id} review={review} />
                 ))}
               </div>
             ) : (
-              <p className="text-muted">
-                Ancora nessuna recensione. Potresti essere il primo, affrettati!
+              <p className="text-muted fst-italic">
+                No reviews yet for this movie. Be the First!
               </p>
             )}
           </div>
