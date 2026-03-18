@@ -7,9 +7,14 @@ export default function MovieListPage() {
   const [movies, setMovies] = useState([]);
 
   // chiamata all'API di Express
+  /**
+   * Unfortunately, keeping any key in your React client, even if you are using gitignore and an .env file, is not secure. As pointed out by Claudiu Creanga, React environment variables are embedded in the build and are publicly accessible.
+
+You should really only save API keys or secrets in your backend such as Node.js or Express.js. You can have your client send a request to your backend API, which can then make the actual API call with the API key and send the data back to your client.
+   */
   function fetchMovies() {
     axios
-      .get(import.meta.env.VITE_API_URL)
+      .get("http://localhost:3000/movies")
       .then((res) => {
         console.log(res.data);
         // i dati che arrivano dal backend nello stato
@@ -23,6 +28,8 @@ export default function MovieListPage() {
   useEffect(() => {
     fetchMovies();
   }, []);
+
+  if (!movies) return <p>Loading films...</p>;
   return (
     <>
       <h1>Movie List</h1>
