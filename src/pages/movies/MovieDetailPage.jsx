@@ -11,7 +11,7 @@ export default function MovieDetailPage() {
   // chiamata all'API di Express
   function fetchMovies() {
     axios
-      .get(`http://localhost:3000/movies/${id}`)
+      .get(`${import.meta.env.VITE_API_BACKEND_URL}/movies/${id}`)
       .then((res) => {
         console.log(res.data);
         // i dati che arrivano dal backend nello stato

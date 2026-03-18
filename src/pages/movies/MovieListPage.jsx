@@ -12,13 +12,14 @@ export default function MovieListPage() {
 
 You should really only save API keys or secrets in your backend such as Node.js or Express.js. You can have your client send a request to your backend API, which can then make the actual API call with the API key and send the data back to your client.
    */
+
   function fetchMovies() {
     axios
-      .get("http://localhost:3000/movies")
+      .get(`${import.meta.env.VITE_API_BACKEND_URL}/movies`)
       .then((res) => {
         console.log(res.data);
         // i dati che arrivano dal backend nello stato
-        setMovies(res.data.result);
+        setMovies(res.data);
       })
       .catch((err) => {
         console.error("Errore nel caricamento dei film", err);
