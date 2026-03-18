@@ -12,7 +12,7 @@ export default function ReviewCard({ review }) {
     for (let i = 1; i <= maxVote; i++) {
       const starClass = i <= vote ? "bi-star-fill" : "bi-star";
       stars.push(
-        <span key={i} className={`bi ${starClass} text warning`}></span>,
+        <span key={i} className={`bi ${starClass} text-warning`}></span>,
       );
     }
     return stars;
@@ -51,12 +51,13 @@ export default function ReviewCard({ review }) {
         {/* Avatar e Nome */}
         <div className="d-flex align-items-center">
           <div
-            className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center shadow-sm"
+            className="rounded-circle text-white d-flex align-items-center justify-content-center shadow-sm"
             style={{
               width: "45px",
               height: "45px",
               fontSize: "1.2rem",
               fontWeight: "bold",
+              backgroundColor: "purple",
             }}
           >
             {/* AVATAR */}
@@ -79,10 +80,7 @@ export default function ReviewCard({ review }) {
       {/* recensione */}
       <p className="mt-3 mb-2 text-secondary fst-italic">"{review.text}"</p>
 
-      <small
-        className="text-muted d-block text-end border-top pt-2"
-        style={{ fontSize: "0.75rem" }}
-      >
+      <small className="text-muted d-block text-end border-top pt-2">
         Pubbliched {formatDate(review.created_at)}
       </small>
     </div>

@@ -18,12 +18,28 @@ export default function MovieDetail({ movie, reviews }) {
           {/* DETTAGLI FILM: Recuperiamo i dati che avevamo "perso" */}
           <div className="movie-info mb-5">
             <h1 className="display-2 fw-bold">{movie.title}</h1>
-            <h5 className="text-muted mb-3">
-              Directed by <strong>{movie.director}</strong> |
-              {` ${movie.release_year}`}
+            <h5 className="text-secondary mb-4 d-flex align-items-center">
+              <span className="me-2">Directed by</span>
+              <span className="text-primary fw-bolder fs-4">
+                {movie.director}
+              </span>
+              <span className="mx-2 text-muted">|</span>
+              <span className="badge bg-light text-dark border">
+                {movie.release_year}
+              </span>
             </h5>
-            <span className="badge bg-info mb-4">{movie.genre}</span>
-
+            <div className="mb-3">
+              <span
+                className="badge rounded-pill px-3 py-2 shadow-sm"
+                style={{
+                  backgroundColor: "#400e0b",
+                  color: "white",
+                }}
+              >
+                <i className="bi bi-tags-fill me-2"></i>
+                {movie.genre}
+              </span>
+            </div>
             <div className="bg-light p-4 rounded shadow-sm">
               <h5 className="fw-bold">Logline</h5>
               <p className="lead mb-0">{movie.abstract}</p>
