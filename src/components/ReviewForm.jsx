@@ -27,11 +27,10 @@ export default function ReviewForm({ movieId, onReviewSuccess }) {
         // se va bene, resetta e avvisa il componente padre (la pagina)
         setFormData(formInitialData);
 
-        /*//note  Quando  la recensione viene inviata, il database viene aggiornato, ma la Pagina non lo sa ancora.
-//note   "Se mio padre mi ha dato un numero di telefono  (onReviewSuccess), io lo chiamo per dirgli che ho finito".
-//note    Chiamando quella funzione, la Pagina farà un nuovo fetchMovies e la tua recensione apparirà subito a schermo senza ricaricare il sito. 
+        //note  Quando  la recensione viene inviata, il database viene aggiornato, ma la Pagina non lo sa ancora.
+        //note   "Se mio padre mi ha dato un numero di telefono  (onReviewSuccess), io lo chiamo per dirgli che ho finito".
+        //note    Chiamando quella funzione, la Pagina farà un nuovo fetchMovies e la tua recensione apparirà subito a schermo senza ricaricare il sito.
 
-*/
         if (onReviewSuccess) onReviewSuccess();
         alert("Review sent successfully!");
       })
