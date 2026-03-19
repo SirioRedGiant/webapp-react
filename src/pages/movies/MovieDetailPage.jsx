@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import MovieDetail from "../../components/MovieDetail";
+import ReviewForm from "../../components/ReviewForm";
 
 export default function MovieDetailPage() {
   //  Stato per l'intero oggetto film
@@ -31,6 +32,7 @@ export default function MovieDetailPage() {
     <>
       <h1>MovieDetail: {movie.title}</h1>
       <MovieDetail movie={movie} reviews={movie.reviews} />
+      <ReviewForm movieId={id} onReviewSuccess={fetchMovies} />
     </>
   );
 }
