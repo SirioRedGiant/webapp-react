@@ -1,6 +1,10 @@
 import { NavLink, Outlet } from "react-router";
+import { useLoaderContext } from "../contexts/Loadercontext";
+import { useAlertContext } from "../contexts/AlertContext";
 
 export default function DefaultTemplate() {
+  const { isLoading } = useLoaderContext();
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -36,7 +40,22 @@ export default function DefaultTemplate() {
         </div>
       </nav>
       <main>
+        {isLoading && (
+          <div className="loader-overlay d-flex justify-content-center align-items-center">
+            <div
+              className="spinner-border text-light"
+              role="status"
+              style={{ width: "3rem", height: "3rem" }}
+            >
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
         <div className="container py-5">
+          {alert.visible && (
+            <div className={`alert alert-${alert.type}`}>{alert.message}</div>
+          )}
+          ;
           <Outlet />
         </div>
       </main>

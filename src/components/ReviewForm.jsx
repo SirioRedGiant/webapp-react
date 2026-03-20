@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { useLoaderContext } from "../contexts/Loadercontext";
+import { useAlertContext } from "../contexts/AlertContext";
 
 export default function ReviewForm({ movieId, onReviewSuccess }) {
   // stato iniziale del form
@@ -11,6 +13,9 @@ export default function ReviewForm({ movieId, onReviewSuccess }) {
 
   const [formData, setFormData] = useState(formInitialData);
   const [errorMessage, setErrorMessage] = useState("");
+  const { activateLoading } = useLoaderContext();
+  const { showAlert } = useAlertContext();
+  const { deactivateLoading } = useLoaderContext();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -21,24 +26,28 @@ export default function ReviewForm({ movieId, onReviewSuccess }) {
   };
 
   const storeMovieReview = () => {
+    activateLoading(); // caricamento in corso
     axios
       .post(
-        `${import.meta.env.VITE_API_BACKEND_URL}/${movieId}/review`,
+        `${import.meta.env.VITE_API_BACKEND_URL}/movies/${movieId}/review`,
         formData,
       )
       .then((res) => {
         // se va bene, resetta e avvisa il componente padre (la pagina)
         setFormData(formInitialData);
+        showAlert("Review succefully uploaded", "success"); // mostra il messaggio di successo
 
         //note  Quando  la recensione viene inviata, il database viene aggiornato, ma la Pagina non lo sa ancora.
         //note   "Se mio padre mi ha dato un numero di telefono  (onReviewSuccess), io lo chiamo per dirgli che ho finito".
         //note    Chiamando quella funzione, la Pagina farà un nuovo fetchMovies e la tua recensione apparirà subito a schermo senza ricaricare il sito.
 
         if (onReviewSuccess) onReviewSuccess();
-        alert("Review sent successfully!");
       })
       .catch((err) => {
         setErrorMessage(err.response?.data?.message || "Error sending review"); // cerca di leggere il messaggio nell'utility validateReview. ? --> OPTIONAL CHAINING servono a non far crashare l'app se il server è spento e quella risposta non esiste.|| oppure --> frase di riserva generica.
+      })
+      .finally((err) => {
+        deactivateLoading();
       });
   };
 
