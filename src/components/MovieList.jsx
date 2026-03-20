@@ -7,6 +7,12 @@ export default function MovieList({ movies }) {
 
   return (
     <div className="row g-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="fw-bold">Our Movies</h2>
+        <Link to="/movies/create" className="btn btn-success shadow-sm">
+          <i className="bi bi-plus-lg me-2"></i>Add New Movie
+        </Link>
+      </div>
       {movies.map((movie) => (
         <div key={movie.id} className="col-md-4">
           <div className="card h-100 shadow-sm">

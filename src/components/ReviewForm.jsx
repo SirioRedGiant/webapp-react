@@ -22,7 +22,10 @@ export default function ReviewForm({ movieId, onReviewSuccess }) {
 
   const storeMovieReview = () => {
     axios
-      .post(`http://localhost:3000/movies/${movieId}/review`, formData)
+      .post(
+        `${import.meta.env.VITE_API_BACKEND_URL}/${movieId}/review`,
+        formData,
+      )
       .then((res) => {
         // se va bene, resetta e avvisa il componente padre (la pagina)
         setFormData(formInitialData);
