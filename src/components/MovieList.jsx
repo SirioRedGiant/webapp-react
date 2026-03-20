@@ -20,10 +20,13 @@ export default function MovieList({ movies }) {
               <h5 className="card-title fw-bold">{movie.title}</h5>
               {/* media voti review in stelline */}
               <div className="mb-2">
-                {renderStars(Math.round(movie.vote_avg || 0))}
-                <small className="ms-2 text-muted">
-                  {movie.vote_avg ? Number(movie.vote_avg).toFixed(1) : "N/D"}
-                </small>
+                {movie.vote_avg ? (
+                  renderStars(Math.round(Number(movie.vote_avg)))
+                ) : (
+                  <span className="text-muted small italic">
+                    N/D 👉 Potresti essere il primo
+                  </span>
+                )}
               </div>
               <p className="card-text text-truncate">{movie.abstract}</p>
               {/* Link di react-router per la navigazione dichiarativa */}
