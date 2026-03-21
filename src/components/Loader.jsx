@@ -1,4 +1,4 @@
-import { useLoaderContext } from "../contexts/Loadercontext";
+import { useLoaderContext } from "../contexts/LoaderContext";
 
 export default function Loader() {
   const { isLoading } = useLoaderContext();

@@ -39,7 +39,9 @@ export default function ReviewCard({ review }) {
       <p className="mt-3 mb-2 text-secondary fst-italic">"{review.text}"</p>
 
       <small className="text-muted d-block text-end border-top pt-2">
-        Pubbliched {formatDate(review.created_at)}
+        {/* se la data esiste, la formattiamo, altrimenti  "Just now" --> per evitare che crashi se l'immagine è in ritardo */}
+        Published
+        {review.created_at ? formatDate(review.created_at) : "Just now"}
       </small>
     </div>
   );

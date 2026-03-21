@@ -1,29 +1,13 @@
-import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { useLoaderContext } from "../contexts/LoaderContext";
+import { useAlertContext } from "../contexts/AlertContext";
 
 export default function MovieCreatePage() {
   const navigate = useNavigate();
-  const initialData = {
-    title: "",
-    director: "",
-    genre: "",
-    release_year: 2024,
-    abstract: "",
-    image: "", // Qui per ora mettiamo un URL stringa
-  };
 
-  const [formData, setFormData] = useState(initialData);
   const { activateLoading, deactivateLoading } = useLoaderContext();
   const { showAlert } = useAlertContext();
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   const storeNewMovie = (e) => {
     e.preventDefault();
@@ -48,6 +32,8 @@ export default function MovieCreatePage() {
           // nel caso l'ID non arrivi
           navigate("/movies");
         }
+        // SCROLL IN CIMA
+        window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch((err) => {
         console.error("Error adding the movie", err);
