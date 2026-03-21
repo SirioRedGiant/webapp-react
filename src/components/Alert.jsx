@@ -1,3 +1,5 @@
+import { useAlertContext } from "../contexts/AlertContext";
+
 export default function Alert() {
   const { Alert: alertData, hideAlert } = useAlertContext(); // Estrazione Alert e renominazione
 
