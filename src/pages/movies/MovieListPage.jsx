@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieList from "../../components/MovieList";
-import { useLoaderContext } from "../../contexts/Loadercontext";
+import { useLoaderContext } from "../../contexts/LoaderContext";
 
 export default function MovieListPage() {
   //  lo stato per i film

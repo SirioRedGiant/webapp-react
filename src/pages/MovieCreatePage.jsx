@@ -14,6 +14,7 @@ export default function MovieCreatePage() {
   };
 
   const [formData, setFormData] = useState(initialData);
+  const { activateLoading, deactivateLoading } = useLoaderContext();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -25,13 +26,14 @@ export default function MovieCreatePage() {
 
   const storeNewMovie = (e) => {
     e.preventDefault();
+    activateLoading();
     axios
       .post(`${import.meta.env.VITE_API_BACKEND_URL}/movies/create`, formData)
-      .then(() => {
+      .then((res) => {
         // prendo l'ID dal corpo della risposta --> res.data
         const newId = res.data.id;
 
-        // Navigo verso la rotta di dettaglio usando l'ID appena ricevuto
+        // Navigo verso la rotta di dettaglio usando l'ID appena ricevuto con ternario --> navigate(newId ? `/movies/${newId}` : "/movies");
         if (newId) {
           navigate(`/movies/${newId}`);
         } else {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useLoaderContext } from "../contexts/Loadercontext";
+import { useLoaderContext } from "../contexts/LoaderContext";
 import { useAlertContext } from "../contexts/AlertContext";
 
 export default function ReviewForm({ movieId, onReviewSuccess }) {
@@ -13,9 +13,8 @@ export default function ReviewForm({ movieId, onReviewSuccess }) {
 
   const [formData, setFormData] = useState(formInitialData);
   const [errorMessage, setErrorMessage] = useState("");
-  const { activateLoading } = useLoaderContext();
+  const { activateLoading, deactivateLoading } = useLoaderContext();
   const { showAlert } = useAlertContext();
-  const { deactivateLoading } = useLoaderContext();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +45,7 @@ export default function ReviewForm({ movieId, onReviewSuccess }) {
       .catch((err) => {
         setErrorMessage(err.response?.data?.message || "Error sending review"); // cerca di leggere il messaggio nell'utility validateReview. ? --> OPTIONAL CHAINING servono a non far crashare l'app se il server è spento e quella risposta non esiste.|| oppure --> frase di riserva generica.
       })
-      .finally((err) => {
+      .finally(() => {
         deactivateLoading();
       });
   };
